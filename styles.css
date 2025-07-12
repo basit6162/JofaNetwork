@@ -1,0 +1,155 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Container */
+.form-container {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 30px 40px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #ffcc00;
+}
+
+/* Paragraph & Status */
+p {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.info-box {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Input fields */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+input:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+/* General Buttons */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #e6b800;
+  transform: scale(1.03);
+}
+
+/* Round Start Mining Button */
+button.start-mining {
+  border-radius: 50px;
+  background-color: #00ff88;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 0 15px #00ff88;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+button.start-mining:hover {
+  background-color: #00cc70;
+  box-shadow: 0 0 25px #00ff88;
+  transform: scale(1.08);
+}
+
+/* Invite Button */
+button.invite {
+  background-color: #00bfff;
+  color: white;
+}
+button.invite:hover {
+  background-color: #0099cc;
+}
+
+/* Boost Hashrate Button */
+button.boost {
+  background-color: #ff66cc;
+  color: white;
+}
+button.boost:hover {
+  background-color: #cc3399;
+}
+
+/* Links */
+a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Error Message */
+.error-message {
+  color: #ff4d4f;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 20px;
+  }
+
+  .form-container h2 {
+    font-size: 20px;
+  }
+
+  input, button {
+    font-size: 14px;
+  }
+}

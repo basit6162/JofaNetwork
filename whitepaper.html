@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitepaper - Jofa Mining</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-background {
+            background: linear-gradient(135deg, #1a4b8c 0%, #0891b2 100%);
+        }
+        .whitepaper-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid #f6e05e;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .whitepaper-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #f6e05e 0%, #d69e2e 100%);
+            color: #1a365d;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .section-icon {
+            color: #f6e05e;
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        .tokenomics-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+        }
+        .tokenomics-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            background-color: #f6e05e;
+            border-radius: 50%;
+        }
+        
+         /* Footer Styles */
+    .app-footer {
+      background-color: #208de3;
+      color: white;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .footer-nav {
+      display: flex;
+      justify-content: space-around;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .footer-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+      font-size: 0.7rem;
+      transition: all 0.2s;
+    }
+    
+    .footer-link i {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+      color: #f6e05e;
+    }
+    
+    .footer-link:hover {
+      color: #f6e05e;
+      transform: translateY(-2px);
+    }
+        .container {
+            padding-bottom: 100px;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0891b2;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1a4b8c;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+
+    <div class="container mx-auto px-4 md:px-6 py-8">
+        <!-- Header Section -->
+        <header class="gradient-background text-white p-8 rounded-2xl mb-10 text-center">
+            <div class="max-w-4xl mx-auto">
+                <i class="fas fa-file-contract text-5xl mb-4 text-yellow-300"></i>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Jofa Mining Whitepaper</h1>
+                <p class="text-xl text-yellow-100">The complete guide to our token ecosystem and community mining platform</p>
+            </div>
+        </header>
+
+        <!-- Whitepaper Content Section -->
+        <div class="max-w-4xl mx-auto space-y-8">
+            <!-- Introduction Section -->
+            <div class="whitepaper-card p-8 bg-white">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-info-circle section-icon"></i>
+                    <h2 class="text-3xl font-bold text-gray-800">Introduction</h2>
+                </div>
+                <div class="text-gray-700 leading-relaxed space-y-4" style="text-align: justify;">
+                    <p>Jofa Mining represents a revolutionary approach to decentralized community engagement through simulated cryptocurrency mining. Our platform enables users to collect Jofa tokens by participating in various activities, creating a fair and transparent ecosystem.</p>
+                    <p>The system is designed with three core principles in mind: accessibility, sustainability, and community-driven growth. By combining elements of gamification with blockchain technology, we've created an engaging experience that rewards participation while maintaining long-term viability.</p>
+                    <p>This whitepaper outlines the technical, economic, and social frameworks that make Jofa Mining a unique and valuable addition to the crypto ecosystem.</p>
+                </div>
+            </div>
+
+            <!-- Tokenomics Section -->
+            <div class="whitepaper-card p-8 bg-white">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-coins section-icon"></i>
+                    <h2 class="text-3xl font-bold text-gray-800">Tokenomics</h2>
+                </div>
+                <div class="text-gray-700">
+                    <p class="mb-6" style="text-align: justify;">The Jofa token economy is carefully structured to ensure sustainable growth and fair distribution. With a total supply of 1 billion tokens, the allocation is designed to support development, community growth, and long-term stability.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-blue-800">Token Distribution</h3>
+                            <ul class="space-y-3">
+                                <li class="tokenomics-item"><strong class="text-blue-800">10% </strong> - Team & Development</li>
+                                <li class="tokenomics-item"><strong class="text-blue-800">30% </strong> - Community Mining</li>
+                                <li class="tokenomics-item"><strong class="text-blue-800">10% </strong> - Partnerships</li>
+                                <li class="tokenomics-item"><strong class="text-blue-800">10% </strong> - Staking Rewards</li>
+                                <li class="tokenomics-item"><strong class="text-blue-800">20% </strong> - Pre-sale</li>
+                                <li class="tokenomics-item"><strong class="text-blue-800">20% </strong> - Liquidity</li>								
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-blue-800">Key Features</h3>
+                            <ul class="space-y-3">
+                                <li class="tokenomics-item">Deflationary mechanisms after 50% distribution</li>
+                                <li class="tokenomics-item">Quarterly token burns based on platform revenue</li>
+                                <li class="tokenomics-item">Dynamic mining difficulty adjustment</li>
+                                <li class="tokenomics-item">Referral bonus system (10% boost per referral)</li>
+                                <li class="tokenomics-item">Governance voting for future developments</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mining Mechanics Section -->
+            <div class="whitepaper-card p-8 bg-white">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-hard-hat section-icon"></i>
+                    <h2 class="text-3xl font-bold text-gray-800">Mining Mechanics</h2>
+                </div>
+                <div class="text-gray-700 leading-relaxed space-y-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-bolt text-yellow-500 mt-1 mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-800 mb-2">Simulated Mining System</h3>
+                            <p style="text-align: justify;">Our platform uses a sophisticated algorithm that simulates real mining operations while eliminating the need for expensive hardware. Users earn mining rewards through:</p>
+                            <ul class="list-disc pl-6 mt-2 space-y-1">
+                                <li>Active participation in daily mining sessions</li>
+                                <li>Completion of engagement tasks and challenges</li>
+                                <li>Community contributions and content creation</li>
+                                <li>Referral program participation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <i class="fas fa-chart-line text-yellow-500 mt-1 mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-800 mb-2">Dynamic Reward System</h3>
+                            <p style="text-align: justify;">The mining rate automatically adjusts based on network participation to ensure fair distribution:</p>
+                            <ul class="list-disc pl-6 mt-2 space-y-1">
+                                <li>Base rate decreases as community grows</li>
+                                <li>Periodic bonus events and mining surges</li>
+                                <li>Special rewards for long-term participants</li>
+                                <li>Anti-cheating mechanisms to ensure fairness</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Section -->
+            <div class="whitepaper-card p-8 bg-white">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-users section-icon"></i>
+                    <h2 class="text-3xl font-bold text-gray-800">Community Growth</h2>
+                </div>
+                <div class="text-gray-700 leading-relaxed space-y-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-bullseye text-yellow-500 mt-1 mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-800 mb-2">Our Vision</h3>
+                            <p style="text-align: justify;">We aim to build a thriving ecosystem of 10 million engaged users who participate in shaping the future of Jofa Mining. Our phased growth strategy includes:</p>
+                            <ul class="list-disc pl-6 mt-2 space-y-1">
+                                <li>Community governance through token voting</li>
+                                <li>Regular platform updates based on user feedback</li>
+                                <li>Educational initiatives to onboard new users</li>
+                                <li>Partnerships with other crypto projects</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <i class="fas fa-trophy text-yellow-500 mt-1 mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-800 mb-2">Engagement Rewards</h3>
+                            <p>Beyond mining, users can earn through various engagement channels:</p>
+                            <ul class="list-disc pl-6 mt-2 space-y-1">
+                                <li>Leaderboard competitions with weekly prizes</li>
+                                <li>Special event participation rewards</li>
+                                <li>Content creation bounties</li>
+                                <li>Bug reporting and platform improvement suggestions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compliance Section -->
+            <div class="whitepaper-card p-8 bg-white">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-shield-alt section-icon"></i>
+                    <h2 class="text-3xl font-bold text-gray-800">Compliance & Security</h2>
+                </div>
+                <div class="text-gray-700 leading-relaxed space-y-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-user-check text-yellow-500 mt-1 mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-800 mb-2">KYC Implementation</h3>
+                            <p style="text-align: justify;">To ensure compliance with global regulations and prepare for future exchange listings, we will implement optional KYC verification with benefits:</p>
+                            <ul class="list-disc pl-6 mt-2 space-y-1">
+                                <li>Higher withdrawal limits for verified users</li>
+                                <li>Access to premium features and staking</li>
+                                <li>Eligibility for special airdrops and events</li>
+                                <li>Priority customer support</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <i class="fas fa-lock text-yellow-500 mt-1 mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-800 mb-2">Security Measures</h3>
+                            <p>User security is our top priority. Our platform implements:</p>
+                            <ul class="list-disc pl-6 mt-2 space-y-1">
+                                <li>Bank-grade encryption for all transactions</li>
+                                <li>Two-factor authentication options</li>
+                                <li>Regular third-party security audits</li>
+                                <li>Cold storage for the majority of reserve funds</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-12">
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">Ready to Join the Jofa Mining Community?</h3>
+                <a href="dashboard.html" class="btn-primary inline-block">
+                    <i class="fas fa-rocket mr-2"></i> Start Mining Now
+                </a>
+            </div> <br /> <br /> 
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="app-footer">
+        <nav class="footer-nav">
+            <a href="mining.html" class="footer-link">
+                <i class="fas fa-digging"></i>
+                <span>Mining</span>
+            </a>
+            <a href="leaderboard.html" class="footer-link">
+                <i class="fas fa-trophy"></i>
+                <span>Leaderboard</span>
+            </a>
+            <a href="dashboard.html" class="footer-link">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="whitepaper.html" class="footer-link">
+                <i class="fas fa-file-alt"></i>
+                <span>Whitepaper</span>
+            </a>
+            <a href="firestreak.html" class="footer-link">
+                <i class="fas fa-fire"></i>
+                <span>Firestreaks</span>
+            </a>
+        </nav>
+    </footer>
+
+</body>
+</html>

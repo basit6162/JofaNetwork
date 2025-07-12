@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enter Referral Code | Jofa Mining</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3f37c9;
+      --success: #4cc9f0;
+      --error: #f72585;
+      --dark: #212529;
+      --light: #f8f9fa;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .referral-container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    h2 {
+      color: var(--dark);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    .description {
+      color: #666;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+    
+    .error-message {
+      color: var(--error);
+      margin-bottom: 15px;
+      font-size: 14px;
+      min-height: 20px;
+    }
+    
+    .success-message {
+      color: var(--success);
+      margin-bottom: 15px;
+      font-size: 14px;
+      min-height: 20px;
+    }
+    
+    .referral-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .input-group {
+      position: relative;
+    }
+    
+    .input-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+    }
+    
+    input {
+      padding: 12px 15px 12px 45px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s;
+      width: 100%;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    }
+    
+    button {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .submit-btn {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .submit-btn:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+    
+    .skip-btn {
+      background: transparent;
+      color: #666;
+      text-decoration: underline;
+    }
+    
+    .skip-btn:hover {
+      color: var(--dark);
+    }
+    
+    .benefits {
+      text-align: left;
+      margin: 25px 0;
+      padding: 0 10px;
+    }
+    
+    .benefits h3 {
+      color: var(--dark);
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    
+    .benefits ul {
+      list-style-type: none;
+    }
+    
+    .benefits li {
+      padding: 8px 0;
+      color: #666;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .benefits li i {
+      color: var(--success);
+      margin-top: 3px;
+    }
+    
+    /* Loading Overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      display: none;
+    }
+    
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(67, 97, 238, 0.2);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      color: var(--dark);
+      font-size: 18px;
+      font-weight: 500;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .referral-container {
+        padding: 20px;
+      }
+      
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="referral-container">
+    <h2>Enter Your Referral Code</h2>
+    <p class="description">To activate your account and start earning, please enter the referral code you received from your inviter.</p>
+    
+    <div id="errorMessage" class="error-message"></div>
+    <div id="successMessage" class="success-message"></div>
+    
+    <form id="referralForm" class="referral-form">
+      <div class="input-group">
+        <i class="fas fa-user-friends input-icon"></i>
+        <input type="text" id="referralCode" placeholder="Enter referral code" required />
+      </div>
+      
+      <button type="submit" class="submit-btn">Submit & Continue</button>
+      <button type="button" id="skipBtn" class="skip-btn">I don't have a referral code</button>
+    </form>
+    
+    <div class="benefits">
+      <h3>Why enter a referral code?</h3>
+      <ul>
+        <li><i class="fas fa-check-circle"></i> <span>Get bonus rewards when you join through a referral</span></li>
+        <li><i class="fas fa-check-circle"></i> <span>Help your inviter earn referral bonuses</span></li>
+        <li><i class="fas fa-check-circle"></i> <span>Join an active mining community</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="loading-text">Processing your referral...</div>
+  </div>
+
+ <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7f9y43FTWklNNYVE5TrEKoqlSMt3Nv8U",
+    authDomain: "simulatedminingapp.firebaseapp.com",
+    projectId: "simulatedminingapp",
+    storageBucket: "simulatedminingapp.appspot.com",
+    messagingSenderId: "1075873844477",
+    appId: "1:1075873844477:web:4b16da1ccb420ccb25c294"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
+<script>
+  // DOM Elements
+  const referralForm = document.getElementById('referralForm');
+  const skipBtn = document.getElementById('skipBtn');
+  const errorMessage = document.getElementById('errorMessage');
+  const successMessage = document.getElementById('successMessage');
+  const loadingOverlay = document.getElementById('loadingOverlay');
+
+  // Show error message
+  function showError(message) {
+    errorMessage.textContent = message;
+    successMessage.textContent = '';
+  }
+
+  // Show success message
+  function showSuccess(message) {
+    successMessage.textContent = message;
+    errorMessage.textContent = '';
+  }
+
+  // Show loading screen
+  function showLoading() {
+    loadingOverlay.style.display = 'flex';
+  }
+
+  // Hide loading screen
+  function hideLoading() {
+    loadingOverlay.style.display = 'none';
+  }
+
+  // Handle form submission
+  referralForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    showLoading();
+    
+    const referralCode = document.getElementById('referralCode').value.trim();
+    const user = auth.currentUser;
+
+    if (!user) {
+      hideLoading();
+      return showError('You must be logged in to submit a referral');
+    }
+
+    try {
+      // Check if referral code exists
+      const referralQuery = await db.collection('users')
+        .where('referralCode', '==', referralCode)
+        .limit(1)
+        .get();
+
+      if (referralQuery.empty) {
+        hideLoading();
+        return showError('Invalid referral code. Please check and try again.');
+      }
+
+      // Update both user and referrer in a transaction
+      await db.runTransaction(async (transaction) => {
+        const userRef = db.collection('users').doc(user.uid);
+        const referrerDoc = referralQuery.docs[0];
+        const referrerRef = referrerDoc.ref;
+
+        // Update user document
+        transaction.update(userRef, {
+          referredBy: referralCode,
+          hasCompletedReferral: true,
+          miningStart: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Update referrer's count
+        transaction.update(referrerRef, {
+          referrals: firebase.firestore.FieldValue.increment(1)
+        });
+      });
+
+      hideLoading();
+      showSuccess('✓ Referral successfully applied! Redirecting to dashboard...');
+      setTimeout(() => location.href = 'dashboard.html', 1500);
+    } catch (error) {
+      hideLoading();
+      showError(error.message);
+    }
+  });
+
+  // Skip referral
+  skipBtn.addEventListener('click', async () => {
+    showLoading();
+    const user = auth.currentUser;
+
+    try {
+      if (user) {
+        await db.collection('users').doc(user.uid).update({
+          hasCompletedReferral: true,
+          miningStart: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      }
+      hideLoading();
+      location.href = 'dashboard.html';
+    } catch (error) {
+      hideLoading();
+      showError('Error skipping referral: ' + error.message);
+    }
+  });
+
+  // Check authentication state
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      location.href = 'index.html';
+    } else if (user) {
+      // Check if user already completed referral
+      db.collection('users').doc(user.uid).get()
+        .then((doc) => {
+          if (doc.exists && doc.data().hasCompletedReferral) {
+            location.href = 'dashboard.html';
+          }
+        });
+    }
+  });
+</script>
+
+</body>
+</html>

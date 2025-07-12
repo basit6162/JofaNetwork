@@ -1,0 +1,34 @@
+<div class='row' id='sora_blogger_cntct_form'>
+<div class='wrap-me wow fadeInLeft' data-wow-delay='0.2s' style='visibility: visible;'>
+<b:section class='sora-contact-widget' id='Contact Widget' maxwidgets='1' name='Contact Form Widget' showaddelement='no'>
+  <b:widget id='ContactForm1' locked='false' title='Contact Form' type='ContactForm' version='1'>
+    <b:includable id='main'>
+  <div class='contact-form-widget'>
+    <div class='form'>
+      <form name='contact-form'>
+        <p/>
+        <span class='name-bg'>Name*</span>
+        <br/>
+        <input class='contact-form-name' expr:id='data:widget.instanceId + &quot;_contact-form-name&quot;' name='name' size='30' type='text' value=''/>
+        <p/>
+        <span class='email-bg'>Email*</span>
+        <br/>
+        <input class='contact-form-email' expr:id='data:widget.instanceId + &quot;_contact-form-email&quot;' name='email' size='30' type='text' value=''/>
+        <p/>
+        <span class='message-bg'>Message*</span>
+        <br/>
+        <textarea class='contact-form-email-message' cols='25' expr:id='data:widget.instanceId + &quot;_contact-form-email-message&quot;' name='email-message' rows='5'/>
+        <p/>
+<span class='send-bg'>
+        <input class='contact-form-button contact-form-button-submit' expr:id='data:widget.instanceId + &quot;_contact-form-submit&quot;' expr:value='data:contactFormSendMsg' type='button'/></span>
+<span class='clear-bg'><input class='contact-form-button contact-form-button-submit clear-button' type='reset' value='Clear'/></span>
+        <p/>
+    <div style='max-width: 100%; text-align: center; width: 100%;'>
+<div class='contact-form-error-message' id='ContactForm1_contact-form-error-message'>
+</div>
+<div class='contact-form-success-message' id='ContactForm1_contact-form-success-message'>
+</div>
+</div>
+      </form>
+    </div>
+  </div>

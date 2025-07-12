@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="styles.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase and other JS libraries -->
+    <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7f9y43FTWklNNYVE5TrEKoqlSMt3Nv8U",
+    authDomain: "simulatedminingapp.firebaseapp.com",
+    projectId: "simulatedminingapp",
+    storageBucket: "simulatedminingapp.appspot.com",
+    messagingSenderId: "1075873844477",
+    appId: "1:1075873844477:web:4b16da1ccb420ccb25c294"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
+
+</head>
+<body>
+    <header>
+        <h1>User Profile</h1>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="mining.html">Mining</a>
+            <a href="leaderboard.html">Leaderboard</a>
+            <a href="whitepaper.html">Whitepaper</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Your Profile</h2>
+            <form id="profileForm">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+                
+                <label for="walletAddress">Wallet Address (Optional)</label>
+                <input type="text" id="walletAddress" placeholder="Enter Solana wallet address">
+                
+                <button type="button" onclick="saveProfile()">Save Profile</button>
+            </form>
+
+            <h3>Your Referral Code</h3>
+            <p id="referralCode"></p>
+            
+            <div class="share-options">
+                <h4>Share your referral code:</h4>
+                <button onclick="shareReferral('whatsapp')">Share on WhatsApp</button>
+                <button onclick="shareReferral('facebook')">Share on Facebook</button>
+                <button onclick="shareReferral('telegram')">Share on Telegram</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Simulated Mining App</p>
+    </footer>
+
+    <script src="profile.js"></script>
+</body>
+</html>

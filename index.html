@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jofa - Login or Sign Up</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-light: #e0e4ff;
+      --secondary: #3a0ca3;
+      --success: #4cc9f0;
+      --error: #f72585;
+      --dark: #1a1a1a;
+      --dark-gray: #333;
+      --medium-gray: #666;
+      --light-gray: #e6e6e6;
+      --light: #f8f9fa;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+      --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    body {
+      background-color: #f5f7ff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .form-container {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      padding: 40px;
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+    
+    h2 {
+      color: var(--dark);
+      margin-bottom: 24px;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: -0.5px;
+    }
+    
+    .logo {
+      margin-bottom: 16px;
+      font-weight: 800;
+      color: var(--primary);
+      font-size: 32px;
+      letter-spacing: -1px;
+    }
+    
+    .subtitle {
+      color: var(--medium-gray);
+      margin-bottom: 32px;
+      font-size: 16px;
+      font-weight: 400;
+    }
+    
+    .error-message {
+      color: var(--error);
+      margin-bottom: 16px;
+      font-size: 14px;
+      min-height: 20px;
+      font-weight: 500;
+      padding: 10px 15px;
+      background-color: rgba(247, 37, 133, 0.1);
+      border-radius: 8px;
+      display: inline-block;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .input-group {
+      position: relative;
+      text-align: left;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark-gray);
+    }
+    
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--light-gray);
+      border-radius: 10px;
+      font-size: 15px;
+      transition: var(--transition);
+      background-color: var(--white);
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+    
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    
+    button {
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    #signUpBtn {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    #signUpBtn:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    #loginBtn {
+      background: var(--white);
+      color: var(--dark-gray);
+      border: 1px solid var(--light-gray);
+    }
+
+    #loginBtn:hover {
+      background: #f5f5f5;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+      color: var(--medium-gray);
+      font-size: 14px;
+    }
+
+    .divider::before, .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .divider::before {
+      margin-right: 16px;
+    }
+
+    .divider::after {
+      margin-left: 16px;
+    }
+
+    .footer-links {
+      margin-top: 24px;
+      color: var(--medium-gray);
+      font-size: 14px;
+    }
+
+    .footer-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .invite-note {
+      margin-top: 24px;
+      padding: 12px;
+      background-color: var(--primary-light);
+      border-radius: 8px;
+      color: var(--secondary);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--dark-gray);
+    }
+
+    .remember-me input {
+      width: auto;
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      display: none;
+      backdrop-filter: blur(4px);
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(67, 97, 238, 0.2);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      color: var(--dark);
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1001;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      transform: translateY(-20px);
+      transition: var(--transition);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+
+    .success-icon {
+      color: var(--primary);
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--dark);
+    }
+
+    .modal-message {
+      color: var(--medium-gray);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .modal-button {
+      background: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .modal-button:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .logo {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="form-container">
+  <div class="logo">Jofa</div>
+  <h2>Welcome to Jofa Network</h2>
+  <p class="subtitle">Start mining crypto with our cloud platform</p>
+  <div id="errorMessage" class="error-message"></div>
+  <!-- In your index.html -->
+ <p></p> by using Jofa Network, you agree to our<a href="privacy_policy.html" onclick="event.preventDefault(); window.location.href='privacy_policy.html';">Privacy Policy</a></p>
+
+  <script>
+    // Ensure interface is available across pages
+    if(window.AndroidInterface) {
+        sessionStorage.setItem('hasAndroidInterface', 'true');
+    }
+  </script>
+  <!-- Signup/Login Form -->
+  <form id="signupForm">
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Create a password" required />
+    </div>
+
+    <div class="remember-me">
+      <input type="checkbox" id="rememberMe">
+      <label for="rememberMe">Keep me logged in</label>
+    </div>
+
+    <div class="button-group">
+      <button type="submit" id="signUpBtn">
+        <i class="fas fa-user-plus"></i> Sign Up
+      </button>
+    </div>
+  </form>
+
+  <div class="divider">OR</div>
+
+  <div class="button-group">
+    <button id="loginBtn">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </button>
+  </div>
+
+  <div class="footer-links">
+    <a href="#" id="resetPassword">Forgot your password?</a>
+  </div>
+
+  <div class="invite-note">
+    <i class="fas fa-gift"></i> Invited? You'll link your referral after verification!
+  </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">Loading your account</div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+  <div class="modal-content">
+    <div class="modal-icon success-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <h3 class="modal-title">Success!</h3>
+    <p class="modal-message" id="successMessage"></p>
+    <button class="modal-button" id="modalOkButton">Continue</button>
+  </div>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7f9y43FTWklNNYVE5TrEKoqlSMt3Nv8U",
+    authDomain: "simulatedminingapp.firebaseapp.com",
+    projectId: "simulatedminingapp",
+    storageBucket: "simulatedminingapp.appspot.com",
+    messagingSenderId: "1075873844477",
+    appId: "1:1075873844477:web:4b16da1ccb420ccb25c294"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
+<script>
+  // DOM Elements
+  const signupForm = document.getElementById('signupForm');
+  const loginBtn = document.getElementById('loginBtn');
+  const resetPassword = document.getElementById('resetPassword');
+  const errorMessage = document.getElementById('errorMessage');
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  const successModal = document.getElementById('successModal');
+  const successMessage = document.getElementById('successMessage');
+  const modalOkButton = document.getElementById('modalOkButton');
+  const rememberMe = document.getElementById('rememberMe');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+
+  // Check if user is already logged in
+  auth.onAuthStateChanged((user) => {
+    if (user && user.emailVerified) {
+      // User is logged in and email is verified
+      checkReferralStatus(user.uid);
+    } else {
+      // Try to auto-login if remember me was checked
+      const savedEmail = localStorage.getItem('jofa_email');
+      const savedPassword = localStorage.getItem('jofa_password');
+
+      if (savedEmail && savedPassword) {
+        emailInput.value = savedEmail;
+        passwordInput.value = savedPassword;
+        rememberMe.checked = true;
+      }
+    }
+  });
+
+  // Check referral status and redirect accordingly
+  async function checkReferralStatus(uid) {
+    showLoading();
+    try {
+      const userDoc = await db.collection('users').doc(uid).get();
+      if (userDoc.exists && !userDoc.data().hasCompletedReferral) {
+        location.href = 'referral.html';
+      } else {
+        location.href = 'dashboard.html';
+      }
+    } catch (error) {
+      hideLoading();
+      showError(error.message);
+    }
+  }
+
+  // Show error message
+  function showError(message) {
+    errorMessage.textContent = message;
+    errorMessage.style.display = message ? 'block' : 'none';
+  }
+
+  // Show loading screen
+  function showLoading() {
+    loadingOverlay.style.display = 'flex';
+  }
+
+  // Hide loading screen
+  function hideLoading() {
+    loadingOverlay.style.display = 'none';
+  }
+
+  // Show success modal
+  function showSuccess(message) {
+    successMessage.textContent = message;
+    successModal.classList.add('active');
+  }
+
+  // Close modal
+  modalOkButton.addEventListener('click', () => {
+    successModal.classList.remove('active');
+  });
+
+  // Signup form submission
+  signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    showLoading();
+
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
+    try {
+      const result = await auth.createUserWithEmailAndPassword(email, password);
+      await result.user.sendEmailVerification();
+
+      // Create user document
+      const userRef = db.collection('users').doc(result.user.uid);
+      await userRef.set({
+        email,
+        referralCode: "", // Will be set later
+        referredBy: "", // Will be set in referral page
+        referrals: 0,
+        totalEarned: 0,
+        miningStart: null,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        hasCompletedReferral: false // Track if user completed referral step
+      });
+
+      hideLoading();
+      showSuccess('🎉 Account created successfully! Please check your email to verify your account. After verification, you will be asked to enter a referral code.');
+
+      // Reset form
+      signupForm.reset();
+    } catch (error) {
+      hideLoading();
+      showError(error.message);
+    }
+  });
+
+  // Login button
+  loginBtn.addEventListener('click', async () => {
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+      return showError('Please enter both email and password');
+    }
+
+    showLoading();
+
+    try {
+      // Set persistence based on remember me checkbox
+      const persistence = rememberMe.checked ?
+        firebase.auth.Auth.Persistence.LOCAL :
+        firebase.auth.Auth.Persistence.SESSION;
+
+      await auth.setPersistence(persistence);
+
+      const result = await auth.signInWithEmailAndPassword(email, password);
+
+      // Save credentials if remember me is checked
+      if (rememberMe.checked) {
+        localStorage.setItem('jofa_email', email);
+        localStorage.setItem('jofa_password', password);
+      } else {
+        localStorage.removeItem('jofa_email');
+        localStorage.removeItem('jofa_password');
+      }
+
+      // Check if email is verified
+      if (!result.user.emailVerified) {
+        await auth.signOut();
+        hideLoading();
+        return showError('Please verify your email before logging in.');
+      }
+
+      // Check if user completed referral step
+      const userDoc = await db.collection('users').doc(result.user.uid).get();
+      if (userDoc.exists && !userDoc.data().hasCompletedReferral) {
+        hideLoading();
+        location.href = 'referral.html'; // Redirect to referral page
+      } else {
+        hideLoading();
+        location.href = 'dashboard.html'; // Go to dashboard
+      }
+    } catch (error) {
+      hideLoading();
+      showError(error.message);
+    }
+  });
+
+  // Reset Password
+  resetPassword.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const email = emailInput.value;
+    
+    if (!email) {
+      return showError('Please enter your email to reset password.');
+    }
+
+    showLoading();
+    
+    try {
+      await auth.sendPasswordResetEmail(email);
+      hideLoading();
+      showSuccess(`📧 Password reset email sent to ${email}!`);
+    } catch (error) {
+      hideLoading();
+      showError(error.message);
+    }
+  });
+</script>
+
+</body>
+</html>
