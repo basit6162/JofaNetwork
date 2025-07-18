@@ -207,29 +207,9 @@
       padding-bottom: 80px;
     }
 
-    /* Table Column Widths */
-    .leaderboard-table th, .leaderboard-table td {
-      padding: 8px 12px;
-      font-size: 0.85rem;
-    }
-    
-    .leaderboard-table th:nth-child(1), .leaderboard-table td:nth-child(1) { /* Rank */
-      width: 15%;
-      text-align: center;
-    }
-    
-    .leaderboard-table th:nth-child(2), .leaderboard-table td:nth-child(2) { /* Miner */
-      width: 40%;
-    }
-    
-    .leaderboard-table th:nth-child(3), .leaderboard-table td:nth-child(3) { /* Total Jofa */
-      width: 25%;
-      text-align: center;
-    }
-    
-    .leaderboard-table th:nth-child(4), .leaderboard-table td:nth-child(4) { /* Referrals */
-      width: 20%;
-      text-align: center;
+    /* Table font size adjustment */
+    .leaderboard-table {
+      font-size: 0.75rem; /* Reduced from text-sm (0.875rem) to text-xs */
     }
   </style>
 </head>
@@ -277,13 +257,13 @@
       </div>
       
       <div class="overflow-x-auto">
-        <table class="min-w-full text-sm leaderboard-table">
+        <table class="min-w-full leaderboard-table">
           <thead class="bg-blue-500 text-white">
             <tr>
-              <th class="py-3 px-4 rounded-tl-lg">Rank</th>
-              <th class="py-3 px-4 text-left">Miner</th>
-              <th class="py-3 px-4">Total Jofa</th>
-              <th class="py-3 px-4">Referrals</th>
+              <th class="py-2 px-3 rounded-tl-lg">Rank</th>
+              <th class="py-2 px-3 text-left">Miner</th>
+              <th class="py-2 px-3">Total Jofa</th>
+              <th class="py-2 px-3 rounded-tr-lg">Team</th>
             </tr>
           </thead>
           <tbody id="leaderboard" class="bg-white divide-y divide-gray-200">
@@ -299,7 +279,6 @@
       
       <div class="flex justify-between items-center mt-4">
         <p id="totalUsers" class="text-gray-600"></p>
-        <p id="totalMined" class="text-gray-600"></p>
         <p id="currentUserRank" class="text-blue-600 font-medium"></p>
       </div>
     </div>
@@ -350,7 +329,6 @@
     // DOM elements
     const leaderboard = document.getElementById("leaderboard");
     const totalUsers = document.getElementById("totalUsers");
-    const totalMined = document.getElementById("totalMined");
     const currentUserRank = document.getElementById("currentUserRank");
     const refreshButton = document.getElementById("refreshButton");
     const lastUpdated = document.getElementById("lastUpdated");
@@ -550,14 +528,7 @@
         const allUsers = await db.collection("users").get();
         const totalCount = allUsers.size;
 
-        // 3. Calculate total mined Jofa (from top 100 for screenshot purposes)
-        let totalMinedJofa = 0;
-        snapshot.forEach(doc => {
-          const userData = doc.data();
-          totalMinedJofa += userData.totalEarned || userData.tokensEarned || 0;
-        });
-
-        // 4. Get current user's data
+        // 3. Get current user's data
         let currentUserData = null;
         if (currentUserId) {
           const currentUserDoc = await db.collection("users").doc(currentUserId).get();
@@ -567,7 +538,6 @@
         // Update UI
         updateLastUpdatedTime();
         totalUsers.innerHTML = `<i class="fas fa-users mr-2"></i>Total Miners: ${formatNumber(totalCount)}`;
-        totalMined.innerHTML = `<i class="fas fa-coins mr-2"></i>Total Mined: ${formatNumber(totalMinedJofa.toFixed(2))} Jofa`;
         
         // Populate leaderboard
         leaderboard.innerHTML = '';
@@ -599,11 +569,11 @@
             row.className = `hover:bg-gray-50 ${isCurrentUser ? 'bg-blue-50 font-medium' : ''} ${index < 3 ? `rank-${index+1}` : ''}`;
             
             row.innerHTML = `
-              <td class="py-3 px-4 text-center">
+              <td class="py-2 px-3 text-center">
                 ${index + 1}
                 ${index < 3 ? `<i class="fas fa-medal ml-1"></i>` : ''}
               </td>
-              <td class="py-3 px-4">
+              <td class="py-2 px-3">
                 <div class="flex items-center">
                   <div class="flex-shrink-0 h-8 w-8 rounded-full ${isCurrentUser ? 'bg-blue-100' : 'bg-gray-200'} flex items-center justify-center">
                     <i class="fas fa-user ${isCurrentUser ? 'text-blue-500' : 'text-gray-600'}"></i>
@@ -614,10 +584,10 @@
                   </div>
                 </div>
               </td>
-              <td class="py-3 px-4 text-center">
+              <td class="py-2 px-3 text-center">
                 ${earnings.toFixed(2)} <span class="text-blue-500">Jofa</span>
               </td>
-              <td class="py-3 px-4 text-center">
+              <td class="py-2 px-3 text-center">
                 ${formatNumber(referrals)}
               </td>
             `;
@@ -644,7 +614,7 @@
     }
 
     function updateLastUpdatedTime() {
-      lastUpdated.textContent = `Last updated: ${new Date().toLocaleString()}`;
+      lastUpdated.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
     }
 
     // Refresh button
@@ -655,6 +625,9 @@
       if (unsubscribeUserData) unsubscribeUserData();
       if (unsubscribeAnnouncements) unsubscribeAnnouncements();
     });
+
+    // Refresh every 360 seconds
+    setInterval(loadLeaderboard, 360000);
   </script>
 </body>
 </html>
